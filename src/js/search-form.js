@@ -60,6 +60,11 @@ async function onLoadBtnClick() {
     Notify.warning(`We're sorry, but you've reached the end of search results.`);
   }
 
+  new SimpleLightbox('.gallery a', { captionDelay: 250, captionsData: 'alt' }).on(
+    'show.simplelightbox',
+    function () {}
+  );
+
   renderGalleryItems(dataImages);
 }
 
@@ -69,30 +74,33 @@ function makeGalleryMarkup(data) {
       const { webformatURL, largeImageURL, tags, likes, views, comments, downloads } = item;
 
       return `
-    <div class="card">
-      <img class="card__img" src="${webformatURL}" alt="${tags}" loading="lazy" />
-      <div class="card__info">
-        <p class="card__info-item">
-          <b>Likes</b>
-          <span class="card__info-value">${likes}</span>
-        </p>
-        <p class="card__info-item">
-          <b>Views</b>        
-          <span class="card__info-value">${views}</span>
+      <a href="${largeImageURL}">
+        <div class="card">
+          <img class="card__img" src="${webformatURL}" alt="${tags}" loading="lazy" />
+          <div class="card__info">
+            <p class="card__info-item">
+              <b>Likes</b>
+              <span class="card__info-value">${likes}</span>
+            </p>
+            <p class="card__info-item">
+              <b>Views</b>        
+              <span class="card__info-value">${views}</span>
 
-        </p>
-        <p class="card__info-item">
-          <b>Comments</b>
-          <span class="card__info-value">${comments}</span>
+            </p>
+            <p class="card__info-item">
+              <b>Comments</b>
+              <span class="card__info-value">${comments}</span>
 
-        </p>
-        <p class="card__info-item">
-          <b>Downloads</b>
-          <span class="card__info-value">${downloads}</span>
+            </p>
+            <p class="card__info-item">
+              <b>Downloads</b>
+              <span class="card__info-value">${downloads}</span>
 
-        </p>
-      </div>
-    </div>`;
+            </p>
+          </div>
+        </div>
+      </a>
+      `;
     })
     .join('');
   return markup;
