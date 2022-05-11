@@ -2,13 +2,24 @@
   position: fixed;
   top: 0;
   left: 0;
-  // width: 100vw;
+  width: 100%;
   background-color: #7dc6c9;
   padding: 20px;
   &__form {
     margin: 0 auto;
-    width: 500px;
     position: relative;
+    @media screen and (max-width: 479px) {
+      width: 90vw;
+    }
+    @media screen and (min-width: 480px) {
+      width: 70vw;
+    }
+    @media screen and (min-width: 700px) {
+      width: 40vw;
+    }
+    @media screen and (min-width: 1600px) {
+      width: 30vw;
+    }
   }
   &__input {
     width: 100%;
@@ -16,6 +27,10 @@
     border: none;
     border-radius: 100px;
     outline: none;
+    color: #414141;
+  }
+  &__input::placeholder {
+    color: #797979;
   }
   &__btn {
     position: absolute;

@@ -4,6 +4,9 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import fetchImages from './api-service.js';
 
+let gallery = new SimpleLightbox('.gallery a');
+gallery.on('show.simplelightbox', function () {});
+
 const refs = {
   searchForm: document.querySelector('#search-form'),
   galleryList: document.querySelector('.gallery'),
@@ -16,6 +19,7 @@ let paginationPageValue = 1;
 refs.searchForm.addEventListener('submit', onSubmit);
 async function onSubmit(e) {
   e.preventDefault();
+
   searchQuery = refs.searchForm.children[0].value;
   refs.searchForm.children[0].value = '';
 
@@ -59,11 +63,6 @@ async function onLoadBtnClick() {
     refs.loadBtn.classList.add('visually-hidden');
     Notify.warning(`We're sorry, but you've reached the end of search results.`);
   }
-
-  new SimpleLightbox('.gallery a', { captionDelay: 250, captionsData: 'alt' }).on(
-    'show.simplelightbox',
-    function () {}
-  );
 
   renderGalleryItems(dataImages);
 }
@@ -109,4 +108,5 @@ function makeGalleryMarkup(data) {
 function renderGalleryItems(dataImages) {
   const imagesMarkup = makeGalleryMarkup(dataImages);
   refs.galleryList.insertAdjacentHTML('beforeend', imagesMarkup);
+  gallery.refresh();
 }
